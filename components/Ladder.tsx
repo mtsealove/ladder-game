@@ -54,6 +54,7 @@ class Ladder extends React.Component<LadderProps, any> {
         // 최대 개수를 2 ~ 4 개로 설정
         line.fill(false);
         const maxLine = 2 + Math.floor(Math.random() * 3);
+        // eslint-disable-next-line no-constant-condition
         while (true) {
           const comb = new Combination(this.combArr(), maxLine);
           const select: number[] = comb.at(Math.floor(Math.random() * Number(comb.length)))!;
