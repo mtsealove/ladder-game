@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 120px;
+}
+
+.prize {
+  background-color: white;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, .2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 18px;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

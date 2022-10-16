@@ -1,6 +1,182 @@
+$black:  #050505;
+
 .container {
   width: 80%;
   margin: 0 auto;
+
+}
+
+.game {
+  transition: 400ms;
+  opacity: 0;
+  width: 100vw;
+
+  &.gameStart {
+    opacity: 1;
+    padding-top: 80px;
+    background-color: white;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+}
+
+.header {
+  background-color: #3FC3B3;
+  padding: 60px 0;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.title {
+  font-size: 42px;
+  margin: 0 0 16px;
+  color: white;
+}
+
+.input {
+  border: none;
+  font-size: 16px;
+  flex: 1;
+  padding: 8px;
+  &:focus {
+    outline: none;
+  }
+  &Container {
+    display: flex;
+    align-items: center;
+    //padding: 8px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .2);
+    width: 320px;
+    background-color: white;
+  }
+  &Btn {
+    background-color: $black;
+    border: none;
+    font-weight: 600;
+    font-size: 14px;
+    color: white;
+    padding: 10px 12px;
+    cursor: pointer;;
+  }
 }
 
 
+@mixin btn {
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  padding: 10px 12px;
+  white-space: nowrap;
+}
+
+.player {
+  //width: 320px;
+  color: $black;
+  background-color: white;
+  box-shadow: 0 0 6px rgba(0, 0, 0, .2);
+  display: flex;
+  align-items: center;
+  span {
+    padding: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    flex: 1;
+  }
+
+  em {
+    font-style: normal;
+    padding: 8px 14px;
+    font-weight: bold;
+  }
+
+  &Remove {
+    background-color: #FE5355;
+    @include btn;
+  }
+
+  &Container {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-row-gap: 16px;
+    grid-column-gap: 24px;
+  }
+
+  &Start {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &Container {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 16px;
+    }
+  }
+
+  &Name {
+    color: $black;
+    font-weight: 600;
+    font-size: 18px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+}
+
+@mixin cntBtn {
+  @include btn;
+  font-size: 20px;
+  min-width: 40px;
+  vertical-align: middle;
+}
+
+.add {
+  @include cntBtn;
+  background-color: #0883FF;
+}
+
+.sub {
+  @include cntBtn;
+  background-color: #FDEBEB;
+  color: #F25F5F;
+}
+
+.modify {
+  position: absolute;
+  width: 100px;
+  height: 50px;
+  right: 0;
+  bottom: 0;
+  &Input {
+    position: absolute;
+    right: 0;
+    bottom: 50px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border: none;
+    padding: 8px 12px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.start {
+  background-color: $black;
+  border: none;
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 48px;
+  padding: 12px 48px;
+  border-radius: 8px;
+  cursor: pointer;
+}

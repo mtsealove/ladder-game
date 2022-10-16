@@ -1,8 +1,14 @@
 .container {
   width: 100%;
+  position: relative;
 }
 
 .canvas {
   width: 100%;
-  height: 500px;
+  height: 600px;
+  position: relative;
+  &.background {
+    position: absolute;
+    left: 0;
+  }
 }
