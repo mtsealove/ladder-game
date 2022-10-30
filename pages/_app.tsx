@@ -1,4 +1,5 @@
 import '../styles/globals.css';
+import '../styles/fonts.scss';
 import type { AppProps } from 'next/app';
 import { useMemo, useState } from 'react';
 import ModifyContext, { ModifyContextProps } from '../lib/ModifyContext';

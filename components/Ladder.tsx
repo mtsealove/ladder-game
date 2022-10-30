@@ -9,6 +9,11 @@ type LadderProps = {
     selectColors: string[]
 }
 
+type Point = {
+  x: number;
+  y: number;
+}
+
 const LINE_HEIGHT = 15; // 라인의 최대 가상 높이
 const PHYSICAL_HEIGHT = 1000; // 라인의 실제 높이
 const LINE_COLOR = '#e4e7ec';
@@ -119,24 +124,69 @@ class Ladder extends React.Component<LadderProps, any> {
     }
   };
 
+  private drawPath = (points: Point[], context: CanvasRenderingContext2D, color: string) => {
+    context.lineWidth = 15;
+    context.lineCap = 'round';
+    context.lineJoin = 'round';
+    context.beginPath();
+    context.strokeStyle = color;
+    let t = 0;
+    const interval = setInterval(() => {
+      context.moveTo(points[t].x, points[t].y);
+      context.lineTo(points[t + 1].x, points[t + 1].y);
+      t += 1;
+      context.stroke();
+      if (t >= points.length - 1) {
+        context.closePath();
+        clearInterval(interval);
+      }
+    }, 20);
+  };
+
   // 길찾기
-  public findPath = (idx: number, color: string) => {
+  public findPath = (idx: number, color: string, clear?: boolean) => {
     const { current: canvas } = this.canvasRef;
     if (canvas) {
       const context = canvas.getContext('2d')!;
-      context.clearRect(0, 0, 10000000, 1000000);
+      if (clear) {
+        context.clearRect(0, 0, 10000000, 1000000);
+      }
       const hGap = (canvas.width) / this.props.players.length;
       const sidePadding = hGap / 2;
       const vGap = PHYSICAL_HEIGHT / LINE_HEIGHT;
+      let xIdx = idx * 2;
+      let yIdx = 1;
+      const points: Point[] = [];
+      points.push({ x: hGap * (xIdx / 2) + sidePadding, y: 10 });
+      points.push({ x: hGap * (xIdx / 2) + sidePadding, y: (yIdx + 1) * vGap * 0.5 });
+      while (yIdx <= LINE_HEIGHT - 1) {
+        points.push({ x: hGap * (xIdx / 2) + sidePadding, y: yIdx * vGap });
+        if (xIdx >= 2 && this.ladderArray[xIdx - 1][yIdx]) { // 좌측 검색
+          xIdx -= 2;
+          points.push({ x: hGap * (xIdx / 2) + sidePadding, y: yIdx * vGap });
+        } else if (xIdx < this.props.players.length * 2 - 2
+                    && this.ladderArray[xIdx + 1][yIdx]) { // 우측 검색
+          points.push({ x: hGap * (xIdx / 2) + sidePadding, y: yIdx * vGap });
+          xIdx += 2;
+        }
+        // 하단 이동
+        points.push({ x: hGap * (xIdx / 2) + sidePadding, y: yIdx * vGap });
+        yIdx += 1;
+        points.push({ x: hGap * (xIdx / 2) + sidePadding, y: yIdx * vGap });
+      }
+      this.drawPath(points, context, color);
+      /*
       context.lineWidth = 15;
       context.lineCap = 'round';
       context.lineJoin = 'round';
       context.beginPath();
-      // context.strokeStyle = this.props.selectColors[idx];
       context.strokeStyle = color;
       let xIdx = idx * 2;
-      let yIdx = 0;
-      while (yIdx <= LINE_HEIGHT) {
+      let yIdx = 1;
+      context.moveTo(hGap * (xIdx / 2) + sidePadding, 10);
+      context.lineTo(hGap * (xIdx / 2) + sidePadding, (yIdx + 1) * vGap * 0.5);
+      context.stroke();
+      while (yIdx <= LINE_HEIGHT - 1) {
         context.moveTo(hGap * (xIdx / 2) + sidePadding, yIdx * vGap);
         if (xIdx >= 2 && this.ladderArray[xIdx - 1][yIdx]) { // 좌측 검색
           xIdx -= 2;
@@ -157,6 +207,7 @@ class Ladder extends React.Component<LadderProps, any> {
         context.lineTo(hGap * (xIdx / 2) + sidePadding, yIdx * vGap);
         context.stroke();
       }
+       */
     }
   };
 
