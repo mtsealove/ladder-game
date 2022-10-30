@@ -75,7 +75,7 @@ const Home: NextPage = () => {
               <button className={styles.share}
                       onClick={takeScreenShot}>
                   결과 공유
-              </button>*/}
+              </button> */}
               <button className={styles.restart}
                       onClick={router.reload}>다시하기</button>
               <section className={styles.container}>

@@ -61,7 +61,7 @@ const VisiblePlayers = ({ players, selectColors, ladderRef }: VisiblePlayersProp
                          style={{
                            backgroundColor: player.color,
                          }}
-                         onClick={() => ladderRef.current?.findPath(idx, player.color)}>
+                         onClick={() => ladderRef.current?.findPath(idx, player.color, true)}>
                         {player.name}
                     </div>
                 </div>
