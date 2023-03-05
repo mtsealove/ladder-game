@@ -1,4 +1,5 @@
 import React from 'react';
+import Prize from '../components/Prize';
 
 export type ModifyContextProps = {
     winnerIdx: number|undefined;
@@ -7,6 +8,10 @@ export type ModifyContextProps = {
     setWinnerName:(w: string|undefined) => void;
     players: string[],
     setPlayers: (p:string[]) =>void;
+    randomPrizes: string[];
+    setRandomPrizes: (p: string[]) => void;
+    resultVisible: boolean;
+    setResultVisible: (v: boolean) => void;
 }
 
 const ModifyContext = React.createContext<ModifyContextProps>({
@@ -16,6 +21,10 @@ const ModifyContext = React.createContext<ModifyContextProps>({
   setWinnerName: () => {},
   players: [],
   setPlayers: () => {},
+  randomPrizes: [],
+  setRandomPrizes: () => {},
+  resultVisible: false,
+  setResultVisible: () => {},
 });
 
 export default ModifyContext;

@@ -34,7 +34,7 @@ const COLORS: string[] = ['#9DC8C8', '#58C9B9', '#519D9E', '#D1B6E1',
 
 const Home: NextPage = () => {
   const {
-    players, winnerIdx,
+    players, winnerIdx, setResultVisible, resultVisible,
   } = useContext(ModifyContext);
   const router = useRouter();
   const [start, setStart] = useState<boolean>(false);
@@ -51,16 +51,6 @@ const Home: NextPage = () => {
     }
     return undefined;
   }, [winnerIdx]);
-  const takeScreenShot = () => {
-    /*
-    html2canvas(document.body)
-      .then((canvas) => {
-        const url = canvas.toDataURL();
-        window.open(url, '_blank');
-      });
-
-     */
-  };
   return (
       <main>
           <NextSeo title='해시의 사다리 타기' />
@@ -76,8 +66,18 @@ const Home: NextPage = () => {
                       onClick={takeScreenShot}>
                   결과 공유
               </button> */}
-              <button className={styles.restart}
-                      onClick={router.reload}>다시하기</button>
+              {start && (
+                  <div className={styles.restartContainer}>
+                      <button className={styles.restart}
+                              onClick={router.reload}>
+                          다시하기
+                      </button>
+                      <button className={styles.restart}
+                              onClick={() => setResultVisible(!resultVisible)}>
+                          전체 표시
+                      </button>
+                  </div>
+              )}
               <section className={styles.container}>
                   <VisiblePlayers players={players}
                                   selectColors={selectColors}

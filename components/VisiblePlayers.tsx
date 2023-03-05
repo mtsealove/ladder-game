@@ -5,6 +5,7 @@ import PlayerColor from './PlayerColor';
 import styles from '../styles/home.module.scss';
 import Ladder from './Ladder';
 import ModifyContext from '../lib/ModifyContext';
+import Prize from './Prize';
 
 type VisiblePlayersProps = {
     players: string[];
@@ -13,7 +14,10 @@ type VisiblePlayersProps = {
 }
 
 // 랜덤으로 사용자를 표출할 컴포넌트
-const VisiblePlayers = ({ players, selectColors, ladderRef }: VisiblePlayersProps) => {
+const VisiblePlayers = ({
+  players, selectColors, ladderRef,
+}: VisiblePlayersProps) => {
+  const { randomPrizes, resultVisible } = useContext(ModifyContext);
   const { winnerName, setWinnerIdx } = useContext(ModifyContext);
   const randomPlayers = useMemo<PlayerColor[]>(() => {
     const result: PlayerColor[] = [];
@@ -52,11 +56,26 @@ const VisiblePlayers = ({ players, selectColors, ladderRef }: VisiblePlayersProp
       }
     }
   }, [winnerName, randomPlayers]);
+  const getPrizeName = (idx: number): string => {
+    if (players.length !== randomPrizes.length) {
+      return '';
+    }
+    if (ladderRef.current) {
+      return randomPrizes[ladderRef.current.getEndPoint(idx)];
+    }
+    return '';
+  };
+
   return (
         <div className={styles.playerStartContainer}>
             {randomPlayers.map((player, idx) => (
                 <div className={styles.playerStart}
                      key={`player c ${idx}`}>
+                  {resultVisible && (
+                      <div className={styles.result}>
+                        {getPrizeName(idx)}
+                      </div>
+                  )}
                     <div className={styles.playerName}
                          style={{
                            backgroundColor: player.color,

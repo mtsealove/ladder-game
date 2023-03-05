@@ -1,6 +1,7 @@
-import React, { useMemo } from 'react';
+import React, {useContext, useMemo} from 'react';
 import Prize from './Prize';
 import styles from '../styles/prize.module.scss';
+import ModifyContext from "../lib/ModifyContext";
 
 type VisiblePrizesProps ={
     prizes: Prize[],
@@ -9,6 +10,7 @@ type VisiblePrizesProps ={
 }
 
 const VisiblePrizes = ({ prizes, players, winnerIdx }:VisiblePrizesProps) => {
+  const {setRandomPrizes} = useContext(ModifyContext);
   const randomPrizes = useMemo(() => {
     let result: string[] = [];
     let notingCnt = players.length;
@@ -31,6 +33,7 @@ const VisiblePrizes = ({ prizes, players, winnerIdx }:VisiblePrizesProps) => {
       result[winnerIdx] = name;
       result[victorIdx] = ogName;
     }
+    setRandomPrizes(result);
     return result;
   }, [players, prizes, winnerIdx]);
 
