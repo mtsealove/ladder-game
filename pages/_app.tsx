@@ -3,7 +3,6 @@ import '../styles/fonts.scss';
 import type { AppProps } from 'next/app';
 import { useMemo, useState } from 'react';
 import ModifyContext, { ModifyContextProps } from '../lib/ModifyContext';
-import Prize from '../components/Prize';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [winnerIdx, setWinnerIdx] = useState<number|undefined>(undefined);

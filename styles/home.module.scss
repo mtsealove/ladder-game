@@ -152,10 +152,12 @@ $black:  #050505;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    position: relative;
 
     &Container {
-      display: flex;
-      justify-content: space-around;
+      //display: flex;
+      //justify-content: space-around;
+      display: grid;
       margin-bottom: 16px;
     }
   }
@@ -177,7 +179,10 @@ $black:  #050505;
   box-shadow: 0 0 3px rgba(black, .2);
   border-radius: 8px;
   margin-bottom: 8px;
-  margin-top: -43px;
+  //margin-top: -43px;
+  word-break: break-all;
+  position: absolute;
+  bottom: 40px;
 }
 
 @mixin cntBtn {

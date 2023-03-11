@@ -1,6 +1,7 @@
 .container {
-  display: flex;
-  justify-content: space-around;
+  //display: flex;
+  //justify-content: space-around;
+  display: grid;
   margin-bottom: 120px;
 }
 
@@ -10,11 +11,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px 18px;
+  padding: 8px 6px;
+  word-break: break-all;
 }
 
 .wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
+  max-width: 100%;
 }

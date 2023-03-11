@@ -19,7 +19,9 @@ const SetupSection = ({ prizes, setPrizes, setStart }:SetupSection) => {
   const prizeRef = useRef<HTMLInputElement>(null);
   // 사용자 추가
   const addPlayer = () => {
-    if (playerName.length === 0) {
+    if (players.length === 40) {
+      window.alert('최대 40명의 플레이어가 참여할 수 있습니다');
+    } else if (playerName.length === 0) {
       window.alert('그래도 이름은 입력해야죠...');
     } else if (players.indexOf(playerName) !== -1) {
       window.alert('이미 있어요!');

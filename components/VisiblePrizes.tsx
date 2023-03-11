@@ -1,7 +1,7 @@
-import React, {useContext, useMemo} from 'react';
+import React, { useContext, useMemo } from 'react';
 import Prize from './Prize';
 import styles from '../styles/prize.module.scss';
-import ModifyContext from "../lib/ModifyContext";
+import ModifyContext from '../lib/ModifyContext';
 
 type VisiblePrizesProps ={
     prizes: Prize[],
@@ -10,7 +10,7 @@ type VisiblePrizesProps ={
 }
 
 const VisiblePrizes = ({ prizes, players, winnerIdx }:VisiblePrizesProps) => {
-  const {setRandomPrizes} = useContext(ModifyContext);
+  const { setRandomPrizes } = useContext(ModifyContext);
   const randomPrizes = useMemo(() => {
     let result: string[] = [];
     let notingCnt = players.length;
@@ -38,7 +38,8 @@ const VisiblePrizes = ({ prizes, players, winnerIdx }:VisiblePrizesProps) => {
   }, [players, prizes, winnerIdx]);
 
   return (
-            <div className={styles.container}>
+            <div className={styles.container}
+                 style={{ gridTemplateColumns: `repeat(${players.length}, 1fr)` }}>
                 {randomPrizes.map((prize, idx) => (
                     <div key={`r prize ${idx}`}
                          className={styles.wrapper}>

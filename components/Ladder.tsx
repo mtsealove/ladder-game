@@ -94,7 +94,7 @@ class Ladder extends React.Component<LadderProps, any> {
       context.clearRect(0, 0, 10000000, 1000000);
       context.beginPath();
       context.strokeStyle = LINE_COLOR;
-      context.lineWidth = 20;
+      context.lineWidth = 10;
       context.lineCap = 'round';
       // 세로선 그리기
       const gap = (canvas.width) / this.props.players.length;
@@ -128,6 +128,7 @@ class Ladder extends React.Component<LadderProps, any> {
     context.lineWidth = 15;
     context.lineCap = 'round';
     context.lineJoin = 'round';
+    context.lineWidth = 10;
     context.beginPath();
     context.strokeStyle = color;
     let t = 0;
@@ -175,39 +176,6 @@ class Ladder extends React.Component<LadderProps, any> {
         points.push({ x: hGap * (xIdx / 2) + sidePadding, y: yIdx * vGap });
       }
       this.drawPath(points, context, color);
-      /*
-      context.lineWidth = 15;
-      context.lineCap = 'round';
-      context.lineJoin = 'round';
-      context.beginPath();
-      context.strokeStyle = color;
-      let xIdx = idx * 2;
-      let yIdx = 1;
-      context.moveTo(hGap * (xIdx / 2) + sidePadding, 10);
-      context.lineTo(hGap * (xIdx / 2) + sidePadding, (yIdx + 1) * vGap * 0.5);
-      context.stroke();
-      while (yIdx <= LINE_HEIGHT - 1) {
-        context.moveTo(hGap * (xIdx / 2) + sidePadding, yIdx * vGap);
-        if (xIdx >= 2 && this.ladderArray[xIdx - 1][yIdx]) { // 좌측 검색
-          xIdx -= 2;
-          context.lineTo(hGap * (xIdx / 2) + sidePadding, yIdx * vGap);
-          context.stroke();
-          context.moveTo(hGap * (xIdx / 2) + sidePadding, yIdx * vGap);
-        } else if (xIdx < this.props.players.length * 2 - 2
-                    && this.ladderArray[xIdx + 1][yIdx]) { // 우측 검색
-          context.lineTo(hGap * (xIdx / 2) + sidePadding, yIdx * vGap);
-          context.stroke();
-          context.moveTo(hGap * (xIdx / 2) + sidePadding, yIdx * vGap);
-          xIdx += 2;
-        }
-        // 하단 이동
-        context.lineTo(hGap * (xIdx / 2) + sidePadding, yIdx * vGap);
-        context.stroke();
-        yIdx += 1;
-        context.lineTo(hGap * (xIdx / 2) + sidePadding, yIdx * vGap);
-        context.stroke();
-      }
-       */
     }
   };
 

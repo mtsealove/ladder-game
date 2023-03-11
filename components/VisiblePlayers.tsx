@@ -67,7 +67,8 @@ const VisiblePlayers = ({
   };
 
   return (
-        <div className={styles.playerStartContainer}>
+        <div className={styles.playerStartContainer}
+             style={{ gridTemplateColumns: `repeat(${players.length}, 1fr)` }}>
             {randomPlayers.map((player, idx) => (
                 <div className={styles.playerStart}
                      key={`player c ${idx}`}>
